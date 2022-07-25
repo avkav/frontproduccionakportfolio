@@ -1,0 +1,21 @@
+/*.btn-edit  s-img {
+    z-index:-1;
+    background: white;
+    position:absolute;
+
+}
+
+.profile-image{
+    z-index:1;
+    border-radius: 50%;
+    position:absolute;
+    border-radius: 5%;
+}
+
+*/
+
+#first-card{
+    display: inline;
+    background-color:black;
+    border-radius: 5px;
+}

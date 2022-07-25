@@ -1,0 +1,96 @@
+<div id="proyectos" class="card border-primary mat-card m-2 p-2" *ngIf="isLogged"> 
+
+
+    <div class="card-titles p-2"> <!--title-->
+        <a name="proyectos"></a>
+            <h2>Proyectos</h2>
+            <div *ngIf="isAdmin"><!--btn fx add-->
+                <button type="button" class=" btn-edit btn btn-outline-primary but" 
+                data-bs-toggle="modal" data-bs-target="#proyectosForm" (click)="onNewProyecto()">
+                     <i class="fa fa-plus">
+                    </i> 
+                </button>
+            </div>
+        </div>
+    
+        
+    <div><!--items-->
+    <ul class="items-list">
+        <li *ngFor="let proyectos of proyectos, let i = index">
+                  
+    <div class="list-info">
+        <div>
+            <h3>{{proyectos.name}}</h3> <!--nombre-->
+            <p>{{proyectos.description}}</p> <!--descripción-->
+            <a [href]="proyectos.url">{{proyectos.url}}</a> <!--url-->
+            <p><time>{{proyectos.projectDate}}</time></p> <!--fecha-->
+        </div>
+     </div>
+    
+    
+
+    <div class="data-control p-2" *ngIf="isAdmin" ><!--btns edit and delete-->
+    
+        <button type="button" class="btn btn-outline-warning but" data-bs-toggle="modal" data-bs-target="#proyectosForm"
+        (click)="editarProyecto(i)">
+            <i class="fa fa-pen">
+            </i>
+        </button>
+
+        <button type="button" class="btn btn-outline-danger but"
+        (click)="eliminarProyecto(i)">
+        <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    
+     </li>
+    </ul>
+     </div>
+      
+    
+
+     <!-- MODAL PARA CRUD -->
+
+ <div class="modal fade" id="proyectosForm" tabindex="-1" aria-labelledby="addProyectosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEstLabel">Proyectos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+          <form novalidate #f="ngForm" [formGroup]="proyectosForm" 
+          (ngSubmit)="nuevoProyecto(proyectosForm.value.id)"> <!--VER-->
+            <input type="hidden" formControlName="id" name="id">
+  
+            <div class="form-group">
+              <label for="text">Nombre del Proyecto</label>
+              <input type="text" name="name" formControlName="name" class="form-control" id="name"
+              placeholder="Nombre del Proyecto">    
+              <label for="text">Descripcion</label>
+              <input type="text" name="description" formControlName="description" class="form-control" id="description"
+              placeholder="Descripcion">
+              <label for="text">URL del proyecto</label>
+              <input type="text" name="url" formControlName="url" class="form-control" id="url"
+              placeholder="URL del proyecto">
+              <label for="text">Fecha del Proyecto</label>
+              <input type="text" name="projectDate" formControlName="projectDate" class="form-control" id="projectDate"
+              placeholder="Fecha del Proyecto">
+
+              
+            </div>
+            <div class="modal-footer justify-content-md-center">
+              <button [disabled]="!f.valid" type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">
+                Guardar
+              </button>
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

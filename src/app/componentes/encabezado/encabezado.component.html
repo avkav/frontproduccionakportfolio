@@ -1,0 +1,131 @@
+<div class="card mat-card seccionEncabezado" name="encabezado" id="first-card" *ngIf="isLogged" > <!--section-->
+     <div class="profile-background-container item" *ngFor="let encabezado of encabezado, let i = index"> <!--img background-->
+        <img  [src]="encabezado.backImage" class="profile-background" width="100%" >
+    </div>
+            
+<div id="info" style="padding:16px" *ngFor="let encabezado of encabezado, let i = index"> <!--img profile-->
+    <div id="badge info-img">
+       <!--   
+        
+        <span class=" bg-light btn-edit s-img"> 
+              <a href="#" class="btn-right"> 
+                <div *ngIf="isAdmin">
+                    <i class="fas fa-pen" > 
+                    </i>
+                    </div>
+                </a> 
+            </span>
+        -->
+    <img class=" profile-image  rounded-circle img-thumbnail" [src]="encabezado.profileImage"  width="200px" height="200px"><!--encabezado.profileImage--><!--../../../assets/img/profile-image.jpg-->
+
+ </div>
+
+
+    <div id="info-data"> <!--datos del portfolio-->
+        <div> <!--nombre y apellido, profesión, universidad-->
+            <h1>{{encabezado.name}}</h1>
+            <div id="info-company">{{encabezado.position}}</div>
+            <div id="info-contact">
+                <span>{{encabezado.ubication}}</span>
+                <!-- <span><a href="http://">Información de contacto</a></span> -->
+            </div>
+        </div>
+        <br>
+        <div id="info-details" > <!--detalles de 2 cursos realizados o estudios (li)-->
+            <span class="p-2">
+                <a [href]="encabezado.companyUrl"> 
+                <img [src]="encabezado.companyImg" width="200px">
+                <h2 class="m-2">{{encabezado.companyName}}</h2>
+                </a>
+            </span>
+            <br>
+            <br>
+            <span class="p-2" ><a [href]="encabezado.schoolUrl"> 
+                <img [src]="encabezado.schoolImg" width="200px " >
+                <h2 class="m-2">{{encabezado.schoolName}}</h2>
+                </a>
+            </span>
+            <div class="data-control p-2" *ngIf="isAdmin" ><!--btns edit and delete-->
+    
+                <button type="button" class="btn btn-outline-warning but" data-bs-toggle="modal" data-bs-target="#encabezadoForm"
+                (click)="editarEncabezado(i)">
+                    <i class="fa fa-pen">
+                    </i>
+                </button>
+    
+                <button type="button" class="btn btn-outline-danger but"
+                (click)="eliminarEncabezado(i)">
+                <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+</div>
+
+ <!-- MODAL PARA CRUD -->
+
+ <div class="modal fade" id="encabezadoForm" tabindex="-1" aria-labelledby="addEncabezadoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEstLabel">Encabezado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+          <form novalidate #f="ngForm" [formGroup]="encabezadoForm" 
+          (ngSubmit)="nuevoEncabezado(encabezadoForm.value.id)"> 
+            <input type="hidden" formControlName="id" name="id">
+  
+            <div class="form-group">
+                <label for="text">Nombre Completo</label>
+              <input type="text" name="name" formControlName="name" class="form-control" id="name"
+                placeholder="Nombre Completo">    
+                <label for="text">URL Imagen de Background</label>
+              <input type="text" name="backImage" formControlName="backImage" class="form-control" id="backImage"
+              placeholder="URL Imagen de Background">
+              <label for="text">URL Foto de Perfil</label>
+              <input type="text" name="profileImage" formControlName="profileImage" class="form-control" id="profileImage"
+              placeholder="URL Foto de Perfil">
+              <label for="text">Puesto actual</label>
+              <input type="text" name="position" formControlName="position" class="form-control" id="position"
+              placeholder="Puesto">
+              <label for="text">Nombre de la Empresa</label>
+              <input type="text" name="companyName" formControlName="companyName" class="form-control form-control-sm" id="companyName"
+              placeholder="Nombre de la Empresa">
+              <label for="text">URL Logo de la Empresa</label>
+              <input type="text" name="companyImg" formControlName="companyImg" class="form-control form-control-sm" id="companyImg"
+              placeholder="URL Logo de la Empresa">
+              <label for="text">URL Sitio Web de la Empresa</label>
+              <input type="text" name="companyUrl" formControlName="companyUrl" class="form-control form-control-sm" id="companyUrl"
+              placeholder="URL Sitio Web de la Empresa">
+              <label for="text">Nombre de la Institucion</label>
+              <input type="text" name="schoolName" formControlName="schoolName" class="form-control form-control-sm" id="schoolName"
+              placeholder="Nombre de la Institucion">
+              <label for="text">URL Imagen de la Institucion</label>
+              <input type="text" name="schoolImg" formControlName="schoolImg" class="form-control form-control-sm" id="schoolImg"
+              placeholder="URL Imagen de la Institucion">
+              <label for="text">URL Sitio Web de la Institucion</label>
+              <input type="text" name="schoolUrl" formControlName="schoolUrl" class="form-control form-control-sm" id="schoolUrl"
+              placeholder="URL Sitio Web de la Institucion">
+              <label for="text">Ubicación</label>
+              <input type="text" name="ubication" formControlName="ubication" class="form-control form-control-sm" id="ubication"
+              placeholder="Ubicación, barrio, provincia, país">
+                            
+            </div>
+            <div class="modal-footer justify-content-md-center">
+              <button [disabled]="!f.valid" type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">
+                Guardar
+              </button>
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,111 @@
+<div id="experiencia" class="card border-primary mat-card m-2 p-2" *ngIf="isLogged"> 
+
+    <div class="card-titles p-2"> <!--title-->
+        <a name="experiencia"></a>
+            <h2>Experiencia</h2>
+            <div *ngIf="isAdmin"><!--btn fx add-->
+                <button type="button" class=" btn-edit btn btn-outline-primary but" 
+                data-bs-toggle="modal" data-bs-target="#experienciaForm" (click)="onNewExperiencia()">
+                     <i class="fa fa-plus">
+                    </i> 
+                </button>
+            </div>
+        </div>
+      
+    <div><!--items-->
+    <ul class="items-list">
+        <li *ngFor="let experiencia of experiencia, let i = index">
+            <div class="data-container"> <!--info-->
+                
+                    <div class="logo-image-container">
+                        <img class="logo-image" [src]="experiencia.img"
+                        />    
+                </div>
+             
+    <div class="list-info">
+        <div>
+            <h3>{{experiencia.position}}</h3> <!--puesto-->
+            <p>{{experiencia.company}}</p><!--empresa-->
+            <p><time>{{experiencia.experienceStart}}</time> - <time>{{experiencia.experienceEnd}}</time></p><!--fecha-->
+            <p>{{experiencia.mode}}</p><!--modalidad-->
+            <p>{{experiencia.expDescription}}</p><!--descripción de la tarea-->
+           
+        </div>
+     </div>
+   
+    </div>
+    
+    <div class="data-control p-2" *ngIf="isAdmin" ><!--btns edit and delete-->
+    
+        <button type="button" class="btn btn-outline-warning but" data-bs-toggle="modal" data-bs-target="#experienciaForm"
+        (click)="editarExperiencia(i)">
+            <i class="fa fa-pen">
+            </i>
+        </button>
+
+        <button type="button" class="btn btn-outline-danger but"
+        (click)="eliminarExperiencia(i)">
+        <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    
+     </li>
+    </ul>
+     </div>
+      
+    </div>
+
+    <!-- MODAL PARA CRUD -->
+
+ <div class="modal fade" id="experienciaForm" tabindex="-1" aria-labelledby="addexperienciaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEstLabel">Experiencia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+          <form novalidate #f="ngForm" [formGroup]="experienciaForm" 
+          (ngSubmit)="nuevaExperiencia(experienciaForm.value.id)"> <!--VER-->
+            <input type="hidden" formControlName="id" name="id">
+  
+            <div class="form-group">
+              <label for="text">Puesto</label>
+              <input type="text" name="position" formControlName="position" class="form-control" id="position"
+                placeholder="Puesto desempeñado">    
+              <label for="text">Empresa</label>
+              <input type="text" name="company" formControlName="company" class="form-control" id="company"
+              placeholder="Empresa">
+              <label for="text">URL Logo de la empresa</label>
+              <input type="text" name="img" formControlName="img" class="form-control" id="img"
+              placeholder="URL Logo de la empresa">
+              <label for="text">Modalidad de trabajo</label>
+              <input type="text" name="mode" formControlName="mode" class="form-control" id="mode"
+              placeholder="Modalidad de trabajo">
+              <label for="text">Fecha Inicio</label>
+              <input type="text" name="experienceStart" formControlName="experienceStart" class="form-control form-control-sm" id="experienceStart"
+              placeholder="Fecha Inicio">
+              <label for="text">Fecha Fin</label>
+              <input type="text" name="experienceEnd" formControlName="experienceEnd" class="form-control form-control-sm" id="experienceEnd"
+              placeholder="Fecha Fin">
+              <label for="text">Descripción del puesto</label>
+              <input type="text" name="expDescription" formControlName="expDescription" class="form-control form-control-sm" id="expDescription"
+              placeholder="Descripción del puesto">
+            
+              
+            </div>
+            <div class="modal-footer justify-content-md-center">
+              <button [disabled]="!f.valid" type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">
+                Guardar
+              </button>
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

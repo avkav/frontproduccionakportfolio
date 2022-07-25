@@ -1,0 +1,63 @@
+<div id="idiomas"> <!--section Master Class min 40:17 min-->
+
+
+    <div class="card-titles"> <!--title-->
+        <a name="idiomas"></a>
+            <h2>Idiomas</h2>
+                <div class="btn-edit"> <!--btn fx add-->
+                <a href="#" class="btn-right">  <i class="fa fa-plus"></i></a>
+                </div>
+        </div>
+    
+        
+    <div><!--items-->
+    <ul class="items-list">
+        <li *ngFor="let idiomas of idiomaslist">
+                 
+    <div class="list-info">
+        <div>
+            <h3>{{idiomas.name}}</h3> <!--idioma-->
+            <p>{{idiomas.idiomLevel}}</p> <!--nivel-->
+            
+        </div>
+     </div>
+    
+    
+    
+            <div class="data-control" ><!--btns-->
+        <div class="btn-edit"><a href="#" class="btn-right"><i class="fa fa-pen"></i></a></div>
+            <div class="btn-edit" onclick="eliminar_parrafo()">
+                <a href="#" class="btn-right">  <i class="fa fa-xmark"></i> </a></div>
+    
+    </div>
+    
+     </li>
+    </ul>
+     </div>
+      
+    </div>
+
+     <!-- FORMULARIO DE EDICIÓN PARA CRUD -->
+
+<div *ngIf="edition"> 
+    <section class="edit-section">
+        <div class="edit-part">
+            <div class="form">
+                <button class="close" (click)="closeEdition()"><i class="fa fa-xmark">
+                </i> </button>  
+                <h1 class="mb-3">Editar sección </h1>
+                <form > <!--[formGroup]="form" (ngSubmit)="send2()"-->
+                    <div>
+                        <div class="d-flex">
+                           <label class="form-label" for="acercaDe" > 
+                            Acerca de mi: <input class="form-input" type="text" formControlName="email" name="email" placeholder="Presentación, acerca de mí..." required> 
+                        </label>
+                        
+                    </div>
+                    <button type="submit" class="send-btn">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

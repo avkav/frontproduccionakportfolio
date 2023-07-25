@@ -24,7 +24,8 @@ import { AcercaDe } from '../../assets/data/AcercaDe';
   providedIn: 'root'
 })
 export class PortfolioService { //ProductoService (Luigi)
-  url= "https://agile-basin-83248.herokuapp.com/";
+  url="https://subsequent-lenore-angie.koyeb.app";
+ // url= "https://agile-basin-83248.herokuapp.com/";//
   // url= "http://localhost:8080/"; //productoURL = 'http://localhost:8080/producto/';
 
   constructor(private http:HttpClient) { }
